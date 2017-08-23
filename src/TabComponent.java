@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class TabComponent extends JPanel {
@@ -8,15 +7,11 @@ public class TabComponent extends JPanel {
     private String tabName;
     private Color tabColour;
 
-    // The list to display book marks.
-    private JList bookMarkComponentList;
-    // Contents of the JList.
-    private DefaultListModel<BookMarkComponent> listModel;
+    // Allow the list of bookmarks to scroll.
+    private CustomScrollPane scrollPane;
 
-    // The list of bookmarks.
-    private JTable list;
-    // Allow the list to scroll.
-    private JScrollPane scrollPane;
+    // The list of BookMarks.
+    private CustomList bookMarkList;
 
 
     /**
@@ -28,6 +23,9 @@ public class TabComponent extends JPanel {
         setTabName(tabName);
         setTabColour(tabColour);
         initializeComponents();
+        setOpaque(false);
+//        setBackground(tabColour);
+//        setForeground(tabColour);
     }
 
     private void initializeComponents() {
@@ -42,15 +40,25 @@ public class TabComponent extends JPanel {
         // Make sure it fills up entire space.
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);*/
-        list = new JTable(new CustomListModel());
+        /*list = new JTable(new CustomListModel());
         scrollPane = new JScrollPane(list);
         list.setFillsViewportHeight(true);
-        TableCellRenderer buttonRenderer = new ListButtonRenderer();
+        TableCellRenderer buttonRenderer = new ListButtonRenderer();*/
 
+        bookMarkList = new CustomList();
+        scrollPane = new CustomScrollPane(bookMarkList);
+
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
+
+        setOpaque(true);
     }
 
     public void addBookMark(BookMarkComponent bookMarkComponent) {
 //        listModel.addElement(bookMarkComponent);
+//        scrollPane.getViewport().add(bookMarkComponent);
+        bookMarkList.addBookMark(bookMarkComponent);
+
     }
 
     /*  Getters and Setters */

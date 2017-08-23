@@ -1,0 +1,4 @@
+Possible Bugs:
+
+- If the name of the bookmark is too long, some of it might be cut off in the button.
+- If the description of the bookmark is too long, some of it might be cut off in the button.
